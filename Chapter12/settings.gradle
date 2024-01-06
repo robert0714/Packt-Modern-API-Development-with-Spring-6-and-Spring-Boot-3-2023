@@ -1,0 +1,11 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://repo.spring.io/milestone' }
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'packt-modern-api-development-chapter12'
+
+include 'api'
+include 'server'
+include 'client'

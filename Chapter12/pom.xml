@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.packt.modern.api</groupId>
+        <artifactId>modern-api</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <groupId>com.packt.modern.api</groupId>
+    <artifactId>packt-modern-api-development-chapter12</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <!-- To generate the maven wrapper config run `mvn wrapper:wrapper` -->
+
+    <name>Modern API Development with Spring 6 and Spring Boot 3 Chapter 11</name>
+
+    <description>This project is a collection of simple code samples. It is meant to be used together with the "Modern API Development with Spring 6 and Spring Boot 3" book,
+        published by Packt in order to learn and practice Spring. </description>
+    <modules>
+        <module>api</module>
+        <module>client</module>
+        <module>server</module> 
+    </modules> 
+
+</project>

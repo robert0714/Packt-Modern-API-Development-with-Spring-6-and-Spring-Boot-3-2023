@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.packt.modern.api</groupId>
+    <artifactId>modern-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <!-- To generate the maven wrapper config run `mvn wrapper:wrapper` -->
+
+    <name>Modern API Development with Spring 6 and Spring Boot 3</name>
+
+    <description>This project is a collection of simple code samples. It is meant to be used together with the "Modern API Development with Spring 6 and Spring Boot 3" book,
+        published by Packt in order to learn and practice Spring. </description>
+
+    <properties>
+        <spring-boot.version>3.1.7</spring-boot.version>
+
+        <!-- Java version for non-Boot projects -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <!--  Java version for Boot projects-->
+        <java.version>17</java.version>
+
+        <build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
+        <exec-maven-plugin.version>3.1.1</exec-maven-plugin.version>
+        <docker-maven-plugin.version>0.43.4</docker-maven-plugin.version>
+        <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+        <maven-shade-plugin.version>3.5.1</maven-shade-plugin.version>
+        <maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
+        <jupiter.version>5.9.3</jupiter.version>
+        <kotlin.version>1.8.22</kotlin.version>
+
+        <servletApi.version>6.0.0</servletApi.version>
+        <thymeleaf.version>3.1.2.RELEASE</thymeleaf.version>
+
+        <!-- utils -->
+        <jackson.version>2.15.3</jackson.version>
+        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <lombok.version>1.18.30</lombok.version>
+        <mockito.version>5.8.0</mockito.version>
+        <testcontainers.version>1.18.3</testcontainers.version>
+        <jakarta.annotation.version>2.1.0</jakarta.annotation.version>
+        <jakarta.injectApi.version>2.0.1</jakarta.injectApi.version>
+        <groovy.version>3.0.11</groovy.version>
+        <commons.dbcp2.version>2.9.0</commons.dbcp2.version>
+        <mariadb.client.version>3.3.2</mariadb.client.version>
+        <hikari.version>5.0.1</hikari.version>
+        <hibernate.version>6.2.6.Final</hibernate.version>
+        <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
+        <mongo.driver.version>4.9.1</mongo.driver.version>
+
+        <spring-native.version>0.9.28</spring-native.version>
+        <tomcat.version>10.1.5</tomcat.version>
+        <dgs.version>6.0.5</dgs.version>
+
+        <!-- others -->
+        <restAssured.version>5.3.0</restAssured.version>
+        <h2.version>2.1.214</h2.version>
+        <jooq.version>3.18.8</jooq.version>
+        <aspectj.version>1.9.9.1</aspectj.version>
+        <logback.version>1.4.8</logback.version>
+        <slf4j.version>2.0.7</slf4j.version>
+        <datafaker.version>2.0.2</datafaker.version>        
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <modules>
+        <module>Chapter02</module>
+        <module>Chapter03</module>
+        <module>Chapter04</module>
+        <module>Chapter05</module>
+        <module>Chapter06</module>
+        <module>Chapter08</module>
+        <module>Chapter09</module>
+        <module>Chapter11</module>
+        <module>Chapter12</module>
+        <module>Chapter14</module> 
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.datafaker</groupId>
+                <artifactId>datafaker</artifactId>
+                <version>${datafaker.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+    <defaultGoal>clean install</defaultGoal>
+    <plugins>
+        <plugin>
+            <!-- this plugin provides a task to determine which dependencies have updates -->
+            <!-- mvn versions:update-properties  -->
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>versions-maven-plugin</artifactId>
+            <version>${versions-maven-plugin.version}</version>
+        </plugin>
+    </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${maven-shade-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.junit.jupiter</groupId>
+                            <artifactId>junit-jupiter-engine</artifactId>
+                            <version>${jupiter.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine> 
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/release</url>
+        </repository>
+        <repository>
+            <id>spring-snapshot</id>
+            <url>https://repo.spring.io/snapshot</url>
+        </repository>
+        <repository>
+            <id>spring-milestone</id>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+        <repository>
+            <id>spring-libs-snapshot</id>
+            <url>https://repo.spring.io/libs-snapshot</url>
+        </repository>
+        <repository>
+            <id>spring-libs-milestone</id>
+            <url>https://repo.spring.io/libs-milestone-local</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/release</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-snapshot</id>
+            <url>https://repo.spring.io/snapshot</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestone</id>
+            <url>https://repo.spring.io/milestone</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-libs-snapshot</id>
+            <url>https://repo.spring.io/libs-snapshot</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-libs-milestone</id>
+            <url>https://repo.spring.io/libs-milestone-local</url>
+        </pluginRepository>
+        <pluginRepository>
+			<id>jitpack.io</id>
+			<name>jitpack release</name>
+			<url>https://jitpack.io</url>
+		</pluginRepository>
+    </pluginRepositories>
+
+</project>

@@ -1,0 +1,123 @@
+# Chapter 12 API Governance
+## Sample codes Execuion Environment
+### Docker
+```bash
+docker compose pull
+docker compose up -d
+docker compose ps
+docker compose logs
+docker compose logs -f
+docker compose down
+
+```
+### Podman Machine
+#### If Your OS Is Windows
+##### Install WSL2
+```bash
+wsl --install --no-distribution
+
+// Wait for about 15 minutes
+
+wsl --version
+WSL version： 2.0.9.0
+kernel version： 5.15.133.1-1
+WSLg version： 1.0.59
+MSRDC version： 1.2.4677
+Direct3D version： 1.611.1-81528511
+DXCore version： 10.0.25131.1002-220531-1700.rs-onecore-base2-hyp
+Windows version： 10.0.19045.3803
+```
+If you encounter troubles, refer -> https://learn.microsoft.com/zh-tw/windows/wsl/install-manual
+###### prepared script in Powershell
+```powershell
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+#### Podman Operation
+* Reference
+https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md
+
+###### Basic Command
+* Create podman VM                 
+```bash
+ podman machine init
+```
+* Start podman VM                 
+```bash
+ podman machine start
+```
+
+* Stop podman VM                 
+```bash
+ podman machine stop
+```
+* Remove podman VM                 
+```bash
+ podman machine rm 
+```
+* Enter podman VM                 
+```bash
+podman machine ssh
+ifconfig
+yum install htop
+yum install nmon
+df -H
+docker compose pull
+docker compose up -d
+```
+### Vagrant
+* Create /Start VM                 
+```bash
+ vagrant up
+``` 
+* Stop VM                 
+```bash
+ vagrant halt
+```
+* Remove VM                 
+```bash
+ vagrant destroy
+```
+* Enter VM                 
+```bash
+ vagrant ssh 
+ df -H
+// sudo apt install -y openjdk-17-jdk curl wget jq maven
+cd /vagrant
+
+docker compose pull
+docker compose up -d
+docker compose ps
+docker compose logs
+docker compose logs -f
+docker compose down
+
+wget -O elastic-apm-agent-1.43.0.jar https://repo1.maven.org/maven2/co/elastic/apm/elastic-apm-agent/1.43.0/elastic-apm-agent-1.43.0.jar  -P /~
+ 
+```
+* server-jar command
+```
+export ELASTIC_APM_APPLICATION_PACKAGES=com.packt.modern.api.*
+export ELASTIC_APM_TRACE_METHODS=com.packt.modern.api.*
+export ELASTIC_APM_STACK_TRACE_LIMIT=180
+export ELASTIC_APM_TRACE_METHODS_DURATION_THRESHOLD=50ms
+export ELASTIC_APM_SERVER_URLS=http://localhost:8200
+export ELASTIC_APM_SERVICE_NAME=server
+java -javaagent:/home/vagrant/elastic-apm-agent-1.43.0.jar -jar  /vagrant/server/target/chapter12-server-0.0.1.jar
+```
+
+* client-jar command
+```
+export ELASTIC_APM_APPLICATION_PACKAGES=com.packt.modern.api.*
+export ELASTIC_APM_TRACE_METHODS=com.packt.modern.api.*
+export ELASTIC_APM_STACK_TRACE_LIMIT=180
+export ELASTIC_APM_TRACE_METHODS_DURATION_THRESHOLD=50ms
+export ELASTIC_APM_SERVER_URLS=http://localhost:8200
+export ELASTIC_APM_SERVICE_NAME=clinet
+
+java -javaagent:/home/vagrant/elastic-apm-agent-1.43.0.jar -jar  /vagrant/client/target/chapter12-client-0.0.1.jar
+```
+##### Client Test
+```bash
+curl http://10.100.198.101:8081/charges
+```
