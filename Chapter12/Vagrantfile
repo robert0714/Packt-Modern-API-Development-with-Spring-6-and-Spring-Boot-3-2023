@@ -22,6 +22,11 @@ Vagrant.configure("2") do |config|
   else
     config.vm.synced_folder ".", "/vagrant"
   end
+ 
+  config.ssh.insert_key = false
+  config.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa']
+  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
+
   # vagrant-hostmanager options
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = false # Your permission would be denied

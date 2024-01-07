@@ -1,4 +1,4 @@
-# Chapter 12 API Governance
+# Chapter 12 Adding Logging and Tracing to Services
 ## Sample codes Execuion Environment
 ### Docker
 ```bash
@@ -121,3 +121,30 @@ java -javaagent:/home/vagrant/elastic-apm-agent-1.43.0.jar -jar  /vagrant/client
 ```bash
 curl http://10.100.198.101:8081/charges
 ```
+## Common Issues
+### Fix “Why I can not ssh to my Vagrant host? vagrant@master: Permission denied (publickey)”
+* Solution:
+  * If you have no publickey
+    ```bash
+    $ ssh-keygen -t rsa -b 4096
+    ```
+  * Modify Vagrantfile
+    ```
+      Vagrant.configure("2") do |config|
+        config.vm.box = "debian/bullseye64"
+        
+        config.ssh.insert_key = false
+        config.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa']
+        config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
+
+        config.vm.provider "virtualbox" do |vb|
+          vb.memory = 2048
+          vb.cpus = 2
+        end
+    ```  
+### Fix “Too long: must have at most 262144 bytes”
+* Solution:  ``kubectl apply -f xyz --server-side``
+* scenarios:
+  * [In ArgoCD](https://foxutech.medium.com/how-to-fix-too-long-must-have-at-most-262144-bytes-in-argocd-2a00cddbbe99)
+  * [In kube-prometheus](https://blog.ediri.io/kube-prometheus-stack-and-argocd-25-server-side-apply-to-the-rescue)
+* Server-Side Apply (SSA) has been generally available in Kubernetes [since the v1.22 release](https://kubernetes.io/blog/2021/08/06/server-side-apply-ga/) in August 2021.  
