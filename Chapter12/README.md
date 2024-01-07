@@ -92,7 +92,7 @@ docker compose logs
 docker compose logs -f
 docker compose down
 
-wget -O elastic-apm-agent-1.43.0.jar https://repo1.maven.org/maven2/co/elastic/apm/elastic-apm-agent/1.43.0/elastic-apm-agent-1.43.0.jar  -P /~
+wget -O /home/vagrant/elastic-apm-agent.jar https://repo1.maven.org/maven2/co/elastic/apm/elastic-apm-agent/1.45.0/elastic-apm-agent-1.45.0.jar
  
 ```
 * server-jar command
@@ -103,7 +103,7 @@ export ELASTIC_APM_STACK_TRACE_LIMIT=180
 export ELASTIC_APM_TRACE_METHODS_DURATION_THRESHOLD=50ms
 export ELASTIC_APM_SERVER_URLS=http://localhost:8200
 export ELASTIC_APM_SERVICE_NAME=server
-java -javaagent:/home/vagrant/elastic-apm-agent-1.43.0.jar -jar  /vagrant/server/target/chapter12-server-0.0.1.jar
+java -javaagent:/home/vagrant/elastic-apm-agent.jar -jar  /vagrant/server/target/chapter12-server-0.0.1.jar
 ```
 
 * client-jar command
@@ -115,12 +115,31 @@ export ELASTIC_APM_TRACE_METHODS_DURATION_THRESHOLD=50ms
 export ELASTIC_APM_SERVER_URLS=http://localhost:8200
 export ELASTIC_APM_SERVICE_NAME=clinet
 
-java -javaagent:/home/vagrant/elastic-apm-agent-1.43.0.jar -jar  /vagrant/client/target/chapter12-client-0.0.1.jar
+java -javaagent:/home/vagrant/elastic-apm-agent.jar -jar  /vagrant/client/target/chapter12-client-0.0.1.jar
 ```
 ##### Client Test
 ```bash
 curl http://10.100.198.101:8081/charges
 ```
+1. Open the Kibana home page in the browser : ```http://10.100.198.101:5600/app/home#/```
+1. Click on the hamburger menu in the top-left corner. Click on the **Discover** option in the menu .
+1. This should open the **Discover** page .If this your first time opening the page, you must **create an index pattern** that will filter out the indexes available in Elasticsearch . 
+1. If you are using Kibana **7.x** , the title is "Create index pattern"; otherwise, if you are using Kibana **8.x**, the title is **Create data view** .
+1. Here, you should enter the index name (**modern-api**) given in the Logstash configuration in the ELK stack’s Docker Compose file .
+1. Here, you can also provide a name for the data view and an index pattern. You can keep the default value of **@timestamp** for **Timestamp field**.
+1. Then, click on the **Save data view to Kibana** button.
+1. You can add the filter query to the **Search** textbox and the **Date/Duration** menu at the top right of the **Discover** page.
+1. Query criteria can be input using the **Kibana Query Language (KQL)**, which allows you to add different comparator and logical operators. For more information, refer to https://www.elastic.co/guide/en/kibana/master/kuery-query.html.
+
+
+The searched **Discovery** page also shows the graph that shows the number of calls made during a particular period. You can generate more logs and reveal any errors, and then you can use different criteria to filter the results and explore further.
+
+You can also save the searches and perform more operations, such as customizing the dashboard. Please refer to https://www.elastic.co/guide/en/kibana/master/index.html for more information.
+
+1. Open the Zipkin home page in the browser : ```http://10.100.198.101:9411/```
+1. Paste the copied trace ID in the **Search by trace ID** textbox in the top-right corner (highlighted in green) and then press *Enter*.
+
+
 ## Common Issues
 ### Fix “Why I can not ssh to my Vagrant host? vagrant@master: Permission denied (publickey)”
 * Solution:
@@ -141,10 +160,4 @@ curl http://10.100.198.101:8081/charges
           vb.memory = 2048
           vb.cpus = 2
         end
-    ```  
-### Fix “Too long: must have at most 262144 bytes”
-* Solution:  ``kubectl apply -f xyz --server-side``
-* scenarios:
-  * [In ArgoCD](https://foxutech.medium.com/how-to-fix-too-long-must-have-at-most-262144-bytes-in-argocd-2a00cddbbe99)
-  * [In kube-prometheus](https://blog.ediri.io/kube-prometheus-stack-and-argocd-25-server-side-apply-to-the-rescue)
-* Server-Side Apply (SSA) has been generally available in Kubernetes [since the v1.22 release](https://kubernetes.io/blog/2021/08/06/server-side-apply-ga/) in August 2021.  
+    ```   

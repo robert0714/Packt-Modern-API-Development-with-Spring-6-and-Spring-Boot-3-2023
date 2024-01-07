@@ -17,6 +17,7 @@ dependency-reduced-pom.xml
 **/target/
 **/log/
 **/.log
+**/.log.gz
 
 # Ignore Gradle GUI config
 gradle-app.setting
