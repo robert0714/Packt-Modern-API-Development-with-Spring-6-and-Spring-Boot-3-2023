@@ -16,7 +16,7 @@
         published by Packt in order to learn and practice Spring. </description>
 
     <properties>
-        <spring-boot.version>3.1.7</spring-boot.version>
+        <spring-boot.version>3.1.8</spring-boot.version>
 
         <!-- Java version for non-Boot projects -->
         <maven.compiler.source>17</maven.compiler.source>
@@ -38,6 +38,8 @@
         <thymeleaf.version>3.1.2.RELEASE</thymeleaf.version>
 
         <!-- utils -->
+        <springdoc.version>2.2.0</springdoc.version>
+        <swagger-ui.version>5.3.1</swagger-ui.version>
         <jackson.version>2.15.3</jackson.version>
         <commons-lang3.version>3.14.0</commons-lang3.version>
         <lombok.version>1.18.30</lombok.version>

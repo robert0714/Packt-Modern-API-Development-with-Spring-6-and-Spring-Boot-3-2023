@@ -23,6 +23,12 @@ We’ll make use of the following Swagger tools in this chapter:
 
 More information on OpenAPI specifications is at https://spec.openapis.org/oas/v3.1.0 .
 
+###  ⚠ Modify the generated code from openapi-generator-maven-plugin to a real implementation 
+* dependency libraries: `${project.basedir}/target/generated-sources/openapi/pom.xml`
+* readme.md: `${project.basedir}/target/generated-sources/openapi/README.md`
+* Key points: ``${project.basedir}/src/main/resources/api/.openapi-generator-ignore``. If the file ``.openapi-generator-ignore`` is empty , the controller is generated.
+
+
 ### API Documentation Standards: OpenAPI, RAML, and API Blueprint
 The daunting task of API documentation is keeping the documentation in sync with the actual implementation. If you take a bottom-up approach and create the API documentation manually after the implementation, you risk the documentation falling out of sync if there are enhancements to the API interface in the next version, especially if the process does not enforce regeneration or validation of the API document.
 

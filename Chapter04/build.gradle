@@ -39,10 +39,10 @@ repositories {
 
 dependencies {
     // OpenAPI Starts
-    swaggerCodegen 'org.openapitools:openapi-generator-cli:6.2.1'
+    swaggerCodegen 'org.openapitools:openapi-generator-cli:7.3.0'
     compileOnly 'io.swagger:swagger-annotations:1.6.4'
     compileOnly 'org.springframework.boot:spring-boot-starter-validation'
-    compileOnly 'org.openapitools:jackson-databind-nullable:0.2.3'
+    compileOnly 'org.openapitools:jackson-databind-nullable:0.2.6'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
     // required for schema in swagger generated code

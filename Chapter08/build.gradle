@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '3.1.7'
+    id 'org.springframework.boot' version '3.1.8'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
     id 'org.hidetake.swagger.generator' version '2.19.2'
@@ -98,10 +98,10 @@ repositories {
 
 dependencies {
     // OpenAPI Starts
-    swaggerCodegen 'org.openapitools:openapi-generator-cli:6.2.1'
+    swaggerCodegen 'org.openapitools:openapi-generator-cli:7.3.0'
     compileOnly 'io.swagger:swagger-annotations:1.6.4'
     compileOnly 'org.springframework.boot:spring-boot-starter-validation'
-    compileOnly 'org.openapitools:jackson-databind-nullable:0.2.3'
+    compileOnly 'org.openapitools:jackson-databind-nullable:0.2.6'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
     // required for schema in swagger generated code
